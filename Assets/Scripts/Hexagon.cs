@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Hexagon : MonoBehaviour {
+    public Color defaultColor;
     public Color player1Color;
     public Color player2Color;
     public Color player1WinColor;
@@ -26,7 +27,7 @@ public class Hexagon : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public IEnumerator Flip() {
+    public IEnumerator Flip(bool undo = false) {
         // Wait for previous flip to finish
         busyFlipping = true;
 
@@ -35,7 +36,10 @@ public class Hexagon : MonoBehaviour {
 
         // Set the color according to player
         Color color;
-        if (GameManager.instance.player1Turn)
+        if (undo) {
+            color = defaultColor;
+            flipped = false;
+        } else if (GameManager.instance.player1Turn)
             color = (GameManager.instance.gameOver ? player1WinColor : player1Color);
         else
             color = (GameManager.instance.gameOver ? player2WinColor : player2Color);
@@ -54,7 +58,7 @@ public class Hexagon : MonoBehaviour {
         }
 
         busyFlipping = false;
-        if (!GameManager.instance.gameOver)
+        if (!GameManager.instance.gameOver && !undo)
             GameManager.instance.player1Turn = !GameManager.instance.player1Turn;
     }
 
@@ -65,6 +69,6 @@ public class Hexagon : MonoBehaviour {
         // Don't flip again
         flipped = true;
         // Flip and toggle the turn
-        GameManager.instance.HandleFlip(this);
+        GameManager.instance.HandleFlip(x, y);
     }
 }

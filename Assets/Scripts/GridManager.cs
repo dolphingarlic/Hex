@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour {
     public Transform hexPrefab;
-    // public Transform redBorderPrefab;
-    // public Transform blueBorderPrefab;
 
     public static int gridWidth = 11;
     public static int gridHeight = 11;
@@ -46,23 +44,6 @@ public class GridManager : MonoBehaviour {
 
         gridHolder = new GameObject("Grid").transform;
 
-        // Transform blueBorder1 = Instantiate(blueBorderPrefab) as Transform;
-        // blueBorder1.position = new Vector3(9.7f, 0, 0.1f);
-        // blueBorder1.Rotate(new Vector3(0, 60, 0));
-        // blueBorder1.transform.SetParent(gridHolder);
-        // Transform blueBorder2 = Instantiate(blueBorderPrefab) as Transform;
-        // blueBorder2.position = new Vector3(-9.7f, 0, -0.1f);
-        // blueBorder2.Rotate(new Vector3(0, -120, 0));
-        // blueBorder2.transform.SetParent(gridHolder);
-        
-        // Transform redBorder1 = Instantiate(redBorderPrefab) as Transform;
-        // redBorder1.position = new Vector3(-4.763f, 0, 8.45f);
-        // redBorder1.transform.SetParent(gridHolder);
-        // Transform redBorder2 = Instantiate(redBorderPrefab) as Transform;
-        // redBorder2.position = new Vector3(4.763f, 0, -8.45f);
-        // redBorder2.Rotate(new Vector3(0, 180, 0));
-        // redBorder2.transform.SetParent(gridHolder);
-
         for (int y = 0; y < gridHeight; y++) {
             for (int x = 0; x < gridWidth; x++) {
                 Transform tile = Instantiate(hexPrefab) as Transform;
@@ -75,6 +56,7 @@ public class GridManager : MonoBehaviour {
                 Hexagon hex = tile.GetComponent<Hexagon>();
                 hex.x = x;
                 hex.y = y;
+                GameManager.instance.hex[GameManager.Normalize(x, y)] = hex;
             }
         }
     }

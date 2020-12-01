@@ -14,4 +14,8 @@ public class ButtonManager : MonoBehaviour {
     public void QuitGame() {
         Application.Quit();
     }
+
+    public void SwapRule() {
+        GameManager.instance.HandleSwapRule();
+    }
 }

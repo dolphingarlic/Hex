@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1d8165635383949b9cd7268967e2b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
   player1Color: {r: 0.019607844, g: 0.78039217, b: 0.69411767, a: 1}
   player2Color: {r: 0.78431374, g: 0, b: 0.8627451, a: 1}
   player1WinColor: {r: 0.34603062, g: 0.9056604, b: 0.8484255, a: 1}
