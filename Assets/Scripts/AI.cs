@@ -348,7 +348,7 @@ public class AI : MonoBehaviour {
                     if (p0 <= 268 || p1 <= 268) mp -= 400;
 
                     v[GameManager.Normalize(x, y)] = mp;
-                    if (mp < m) {
+                    if (mp < m && GetColor(x, y) == 0) {
                         m = mp;
                         xB = x;
                         yB = y;
@@ -384,7 +384,8 @@ public class AI : MonoBehaviour {
                                     GetColor(x - 1, y) == 0 &&
                                     GetColor(x - 1, y + 1) == 0 &&
                                     GetColor(x, y + 1) == 0 &&
-                                    GetColor(x + 1, y) == 0
+                                    GetColor(x + 1, y) == 0 &&
+                                    GetColor(x, y) == 0
                                 ) {
                                     xB = x;
                                     yB = y;
@@ -411,7 +412,8 @@ public class AI : MonoBehaviour {
                                     GetColor(x + 1, y) == 0 &&
                                     GetColor(x + 1, y - 1) == 0 &&
                                     GetColor(x, y - 1) == 0 &&
-                                    GetColor(x - 1, y) == 0
+                                    GetColor(x - 1, y) == 0 &&
+                                    GetColor(x, y) == 0
                                 ) {
                                     xB = x;
                                     yB = y;
@@ -439,7 +441,8 @@ public class AI : MonoBehaviour {
                                     GetColor(x, y - 1) == 0 &&
                                     GetColor(x + 1, y - 1) == 0 &&
                                     GetColor(x + 1, y) == 0 &&
-                                    GetColor(x, y + 1) == 0
+                                    GetColor(x, y + 1) == 0 &&
+                                    GetColor(x, y) == 0
                                 ) {
                                     xB = x;
                                     yB = y;
@@ -466,7 +469,8 @@ public class AI : MonoBehaviour {
                                     GetColor(x, y + 1) == 0 &&
                                     GetColor(x - 1, y + 1) == 0 &&
                                     GetColor(x - 1, y) == 0 &&
-                                    GetColor(x, y - 1) == 0
+                                    GetColor(x, y - 1) == 0 &&
+                                    GetColor(x, y) == 0
                                 ) {
                                     xB = x;
                                     yB = y;
