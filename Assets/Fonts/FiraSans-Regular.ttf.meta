@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5142dfa60f48c1d44a43b9e1fa006caa
+guid: c5ab7372af9430b4585aceffe08293c7
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Gill Sans
+  fontName: Fira Sans
   fontNames:
-  - Gill Sans
+  - Fira Sans
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

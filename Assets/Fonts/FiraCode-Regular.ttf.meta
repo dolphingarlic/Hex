@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f14b59de2bdbc4e4a83b09da9554882d
+guid: 96a5930010dbac049b166b5536f4bea2
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,11 +8,10 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Gill Sans
+  fontName: Fira Code
   fontNames:
-  - Gill Sans
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 5142dfa60f48c1d44a43b9e1fa006caa, type: 3}
+  - Fira Code
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
