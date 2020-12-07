@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -21,7 +20,7 @@ public class Hexagon : MonoBehaviour {
     public static bool busyFlipping = false;
 
     private SpriteRenderer spriteRenderer;
-    private bool flipped = false;
+    public bool flipped = false;
 
     private void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -66,8 +65,6 @@ public class Hexagon : MonoBehaviour {
         // Can only flip a tile once
         if (flipped || busyFlipping || EventSystem.current.IsPointerOverGameObject())
             return;
-        // Don't flip again
-        flipped = true;
         // Flip and toggle the turn
         GameManager.instance.HandleFlip(x, y);
     }

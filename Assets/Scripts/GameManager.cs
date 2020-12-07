@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour {
@@ -9,7 +7,10 @@ public class GameManager : MonoBehaviour {
     [HideInInspector] public bool gameOver = false;
     
     public static GameManager instance = null;
-    public Hexagon[] hex = new Hexagon[GridManager.gridWidth * GridManager.gridHeight];
+    public Hexagon[,] hex = new Hexagon[GridManager.gridWidth, GridManager.gridHeight];
+
+    public Transform aiPrefab;
+    private AI aiComponent;
 
     private GridManager gridManager;
     private GameObject gameOverMenu;
@@ -17,10 +18,10 @@ public class GameManager : MonoBehaviour {
 
     private int totCells;
     private int[] dsu = new int[GridManager.gridWidth * GridManager.gridHeight + 4];
-    private int[] color = new int[GridManager.gridWidth * GridManager.gridHeight];
-    private bool[] visited = new bool[GridManager.gridWidth * GridManager.gridHeight];
+    [HideInInspector] public int[,] color = new int[GridManager.gridWidth, GridManager.gridHeight];
+    private bool[,] visited = new bool[GridManager.gridWidth, GridManager.gridHeight];
 
-    private int moves;
+    [HideInInspector] public int moves;
 
     private readonly int[] dx = {0, 1, -1, 1, -1, 0};
     private readonly int[] dy = {-1, -1, 0, 0, 1, 1};
@@ -56,6 +57,9 @@ public class GameManager : MonoBehaviour {
         
         gridManager = GetComponent<GridManager>();
         gridManager.CreateGrid();
+
+        Transform aiGameObject = Instantiate(aiPrefab) as Transform;
+        aiComponent = aiGameObject.GetComponent<AI>();
     }
 
     public static int Normalize(int x, int y) {
@@ -65,9 +69,8 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator DfsAndFlip(int x, int y) {
         // Flip and mark as visited
-        int currNorm = Normalize(x, y);
-        visited[currNorm] = true;
-        StartCoroutine(hex[currNorm].Flip());
+        visited[x, y] = true;
+        StartCoroutine(hex[x, y].Flip());
         yield return new WaitForSeconds(0.15f);
 
         for (int i = 0; i < 6; i++) {
@@ -75,8 +78,7 @@ public class GameManager : MonoBehaviour {
             int ny = y + dy[i];
             if (nx == -1 || ny == -1 || nx == GridManager.gridWidth || ny == GridManager.gridHeight)
                 continue;
-            int nextNorm = Normalize(nx, ny);
-            if (color[nextNorm] == color[currNorm] && !visited[nextNorm])
+            if (color[x, y] == color[nx, ny] && !visited[nx, ny])
                 StartCoroutine(DfsAndFlip(nx, ny));
         }
     }
@@ -87,19 +89,19 @@ public class GameManager : MonoBehaviour {
             int nx = x + dx[i];
             int ny = y + dy[i];
             // Union with sides if needed
-            if (nx == -1 && color[currNorm] == 1) // Left side
+            if (nx == -1 && color[x, y] == 1) // Left side
                 DsuUnion(currNorm, GridManager.gridWidth * GridManager.gridHeight);
-            else if (nx == GridManager.gridWidth && color[currNorm] == 1) // Right side
+            else if (nx == GridManager.gridWidth && color[x, y] == 1) // Right side
                 DsuUnion(currNorm, GridManager.gridWidth * GridManager.gridHeight + 1);
-            else if (ny == -1 && color[currNorm] == 2) // Top side
+            else if (ny == -1 && color[x, y] == -1) // Top side
                 DsuUnion(currNorm, GridManager.gridWidth * GridManager.gridHeight + 2);
-            else if (ny == GridManager.gridHeight && color[currNorm] == 2) // Bottom side
+            else if (ny == GridManager.gridHeight && color[x, y] == -1) // Bottom side
                 DsuUnion(currNorm, GridManager.gridWidth * GridManager.gridHeight + 3);
             // Union with other cells
             if (nx == -1 || ny == -1 || nx == GridManager.gridWidth || ny == GridManager.gridHeight)
                 continue;
             int nextNorm = Normalize(nx, ny);
-            if (color[nextNorm] == color[currNorm])
+            if (color[nx, ny] == color[x, y])
                 DsuUnion(currNorm, nextNorm);
         }
     }
@@ -109,11 +111,11 @@ public class GameManager : MonoBehaviour {
         for (int x = 0; x < GridManager.gridWidth; x++) {
             for (int y = 0; y < GridManager.gridHeight; y++) {
                 int currNorm = Normalize(x, y);
-                if (color[currNorm] != 0) {
+                if (color[x, y] != 0) {
                     if (x != y) // Ensure a single flip
-                        StartCoroutine(hex[currNorm].Flip(true));
+                        StartCoroutine(hex[x, y].Flip(true));
                     // "Reset" the cell
-                    color[currNorm] = 0;
+                    color[x, y] = 0;
                     dsu[currNorm] = currNorm;
                     // Flip opposite cell
                     HandleFlip(y, x);
@@ -123,30 +125,38 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void HandleFlip(int x, int y) {
-        // Normalize the coordinates and flip
-        int currNorm = Normalize(x, y);
-        StartCoroutine(hex[currNorm].Flip());
-        color[currNorm] = (player1Turn ? 1 : 2);
-        UnionWithNeighbours(x, y);
-
+    public void HandleFlip(int x, int y) {        
+        color[x, y] = (player1Turn ? 1 : -1);
         // Only allow swap rule after first turn
         swapButton.SetActive(++moves == 1);
+        UnionWithNeighbours(x, y);
+
+        // Don't flip again
+        hex[x, y].flipped = true;
+        StartCoroutine(hex[x, y].Flip());
 
         if (DsuFind(totCells) == DsuFind(totCells + 1)) {
             // Player 1 has won
             gameOver = true;
             StartCoroutine(DfsAndFlip(x, y));
-            gameOverMenu.SetActive(true);
             TextMeshProUGUI tmp = gameOverMenu.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             tmp.text = "Player 1 wins!";
         } else if (DsuFind(totCells + 2) == DsuFind(totCells + 3)) {
             // Player 2 has won
             gameOver = true;
             StartCoroutine(DfsAndFlip(x, y));
-            gameOverMenu.SetActive(true);
             TextMeshProUGUI tmp = gameOverMenu.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             tmp.text = "Player 2 wins!";
+        }
+    }
+
+    private void Update() {
+        if (!gameOver && !player1Turn && !Hexagon.busyFlipping) {
+            aiComponent.MakeMove(-1, 3);
+        }
+
+        if (gameOver && !Hexagon.busyFlipping) {
+            gameOverMenu.SetActive(true);
         }
     }
 }

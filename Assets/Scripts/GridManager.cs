@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GridManager : MonoBehaviour {
     public Transform hexPrefab;
@@ -56,7 +54,7 @@ public class GridManager : MonoBehaviour {
                 Hexagon hex = tile.GetComponent<Hexagon>();
                 hex.x = x;
                 hex.y = y;
-                GameManager.instance.hex[GameManager.Normalize(x, y)] = hex;
+                GameManager.instance.hex[x, y] = hex;
             }
         }
     }

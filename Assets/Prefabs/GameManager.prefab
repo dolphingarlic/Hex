@@ -46,6 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Turn: 1
   gameOver: 0
+  aiPrefab: {fileID: 8007373421782407475, guid: 3ce6d324e73de7549802d9d6c7277390,
+    type: 3}
+  moves: 0
 --- !u!114 &6990418116568041380
 MonoBehaviour:
   m_ObjectHideFlags: 0
