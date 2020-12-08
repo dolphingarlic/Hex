@@ -146,7 +146,7 @@ public class AI : MonoBehaviour {
         }
 
         if (level > 1) {
-            bridge[x, y, k] = n / 5;
+            bridge[x, y, k] = n / 5f;
             if (n >= 2 && n < 10) {
                 bridge[x, y, k] = b + n - 2;
                 m -= 32;

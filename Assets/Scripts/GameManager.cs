@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
     public Transform aiPrefab;
     private AI aiComponent;
 
+    public bool[] isAI = new bool[2];
+
     private GridManager gridManager;
     private GameObject gameOverMenu;
     private GameObject swapButton;
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Start() {
+        // Consistent animation
         Application.targetFrameRate = 60;
 
         if (instance == null) instance = this;
@@ -49,8 +52,11 @@ public class GameManager : MonoBehaviour {
         swapButton = GameObject.Find("SwapButton");
         swapButton.SetActive(false);
 
+        // Reset static variables
         moves = 0;
+        Hexagon.busyFlipping = false;
 
+        // Initialize DSU
         totCells = GridManager.gridWidth * GridManager.gridHeight;
         for (int i = 0; i < totCells + 4; i++)
             dsu[i] = i;
@@ -151,8 +157,13 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (!gameOver && !player1Turn && !Hexagon.busyFlipping) {
-            aiComponent.MakeMove(-1, 3);
+        if (!gameOver && !Hexagon.busyFlipping) {
+            if (player1Turn && PlayerPrefs.GetInt("player1IsAI") == 1) {
+                aiComponent.MakeMove(1, 3);
+            }
+            if (!player1Turn && PlayerPrefs.GetInt("player2IsAI") == 1) {
+                aiComponent.MakeMove(-1, 3);
+            }
         }
 
         if (gameOver && !Hexagon.busyFlipping) {

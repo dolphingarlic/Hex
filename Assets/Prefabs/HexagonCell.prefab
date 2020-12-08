@@ -164,6 +164,7 @@ MonoBehaviour:
   flipSound: {fileID: 8300000, guid: 97b1c179f26c07b479268cc8de03fbc8, type: 3}
   x: 0
   y: 0
+  flipped: 0
 --- !u!60 &-2272625189311218736
 PolygonCollider2D:
   m_ObjectHideFlags: 0
