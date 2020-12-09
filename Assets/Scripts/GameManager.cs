@@ -2,10 +2,11 @@
 using UnityEngine;
 using TMPro;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
     [HideInInspector] public bool player1Turn = true;
     [HideInInspector] public bool gameOver = false;
-    
+
     public static GameManager instance = null;
     public Hexagon[,] hex = new Hexagon[GridManager.gridWidth, GridManager.gridHeight];
 
@@ -25,22 +26,26 @@ public class GameManager : MonoBehaviour {
 
     [HideInInspector] public int moves;
 
-    private readonly int[] dx = {0, 1, -1, 1, -1, 0};
-    private readonly int[] dy = {-1, -1, 0, 0, 1, 1};
+    private readonly int[] dx = { 0, 1, -1, 1, -1, 0 };
+    private readonly int[] dy = { -1, -1, 0, 0, 1, 1 };
 
-    private int DsuFind(int a) {
-        while (dsu[a] != a) {
+    private int DsuFind(int a)
+    {
+        while (dsu[a] != a)
+        {
             dsu[a] = dsu[dsu[a]];
             a = dsu[a];
         }
         return a;
     }
 
-    private void DsuUnion(int a, int b) {
+    private void DsuUnion(int a, int b)
+    {
         dsu[DsuFind(a)] = DsuFind(b);
     }
 
-    private void Start() {
+    private void Start()
+    {
         // Consistent animation
         Application.targetFrameRate = 60;
 
@@ -60,7 +65,7 @@ public class GameManager : MonoBehaviour {
         totCells = GridManager.gridWidth * GridManager.gridHeight;
         for (int i = 0; i < totCells + 4; i++)
             dsu[i] = i;
-        
+
         gridManager = GetComponent<GridManager>();
         gridManager.CreateGrid();
 
@@ -68,18 +73,21 @@ public class GameManager : MonoBehaviour {
         aiComponent = aiGameObject.GetComponent<AI>();
     }
 
-    public static int Normalize(int x, int y) {
+    public static int Normalize(int x, int y)
+    {
         // Turn a pair into a single integer
         return x * GridManager.gridHeight + y;
     }
 
-    private IEnumerator DfsAndFlip(int x, int y) {
+    private IEnumerator DfsAndFlip(int x, int y)
+    {
         // Mark as visited, wait, and then flip
         visited[x, y] = true;
         yield return new WaitForSeconds(0.15f);
         StartCoroutine(hex[x, y].Flip());
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 6; i++)
+        {
             int nx = x + dx[i];
             int ny = y + dy[i];
             if (nx == -1 || ny == -1 || nx == GridManager.gridWidth || ny == GridManager.gridHeight)
@@ -89,9 +97,11 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void UnionWithNeighbours(int x, int y) {
+    private void UnionWithNeighbours(int x, int y)
+    {
         int currNorm = Normalize(x, y);
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 6; i++)
+        {
             int nx = x + dx[i];
             int ny = y + dy[i];
             // Union with sides if needed
@@ -112,12 +122,16 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void HandleSwapRule() {
+    public void HandleSwapRule()
+    {
         Debug.Assert(moves == 1);
-        for (int x = 0; x < GridManager.gridWidth; x++) {
-            for (int y = 0; y < GridManager.gridHeight; y++) {
+        for (int x = 0; x < GridManager.gridWidth; x++)
+        {
+            for (int y = 0; y < GridManager.gridHeight; y++)
+            {
                 int currNorm = Normalize(x, y);
-                if (color[x, y] != 0) {
+                if (color[x, y] != 0)
+                {
                     // Ensure a single flip
                     if (x != y)
                         StartCoroutine(hex[x, y].Flip(true));
@@ -132,7 +146,8 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void HandleFlip(int x, int y) {        
+    public void HandleFlip(int x, int y)
+    {
         color[x, y] = (player1Turn ? 1 : -1);
         // Only allow swap rule after first turn
         swapButton.SetActive(++moves == 1);
@@ -145,13 +160,16 @@ public class GameManager : MonoBehaviour {
         // Update potentials
         aiComponent.UpdatePotentials(0);
 
-        if (DsuFind(totCells) == DsuFind(totCells + 1)) {
+        if (DsuFind(totCells) == DsuFind(totCells + 1))
+        {
             // Player 1 has won
             gameOver = true;
             StartCoroutine(DfsAndFlip(x, y));
             TextMeshProUGUI tmp = gameOverMenu.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             tmp.text = "Player 1 wins!";
-        } else if (DsuFind(totCells + 2) == DsuFind(totCells + 3)) {
+        }
+        else if (DsuFind(totCells + 2) == DsuFind(totCells + 3))
+        {
             // Player 2 has won
             gameOver = true;
             StartCoroutine(DfsAndFlip(x, y));
@@ -160,15 +178,20 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void Update() {
-        if (Hexagon.busyFlipping == 0) {
+    private void Update()
+    {
+        if (Hexagon.busyFlipping == 0)
+        {
             if (gameOver)
                 gameOverMenu.SetActive(true);
-            else {
-                if (player1Turn && PlayerPrefs.GetInt("player1IsAI") == 1) {
+            else
+            {
+                if (player1Turn && PlayerPrefs.GetInt("player1IsAI") == 1)
+                {
                     aiComponent.MakeMove(1, PlayerPrefs.GetInt("player1AILevel"));
                 }
-                if (!player1Turn && PlayerPrefs.GetInt("player2IsAI") == 1) {
+                if (!player1Turn && PlayerPrefs.GetInt("player2IsAI") == 1)
+                {
                     aiComponent.MakeMove(-1, PlayerPrefs.GetInt("player2AILevel"));
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class GridManager : MonoBehaviour {
+public class GridManager : MonoBehaviour
+{
     public Transform hexPrefab;
 
     public static int gridWidth = 11;
@@ -13,12 +14,14 @@ public class GridManager : MonoBehaviour {
     private float hexHeight = 1.0f;
     private Vector3 startPos;
 
-    private void AddGap() {
+    private void AddGap()
+    {
         hexWidth += hexWidth * gap;
         hexHeight += hexHeight * gap;
     }
 
-    private void CalcStartPos() {
+    private void CalcStartPos()
+    {
         float offset = (gridHeight / 2 % 2 != 0 ? gridWidth / 2 * hexWidth / 2 : 0);
 
         float x = -hexWidth * (gridWidth / 2) - offset;
@@ -27,7 +30,8 @@ public class GridManager : MonoBehaviour {
         startPos = new Vector3(x, y, 0);
     }
 
-    private Vector3 CalcWorldPos(Vector2 gridPos) {
+    private Vector3 CalcWorldPos(Vector2 gridPos)
+    {
         float offset = gridPos.y * hexWidth / 2;
 
         float x = startPos.x + gridPos.x * hexWidth + offset;
@@ -36,14 +40,17 @@ public class GridManager : MonoBehaviour {
         return new Vector3(x, y, 0);
     }
 
-    public void CreateGrid() {
+    public void CreateGrid()
+    {
         AddGap();
         CalcStartPos();
 
         gridHolder = new GameObject("Grid").transform;
 
-        for (int y = 0; y < gridHeight; y++) {
-            for (int x = 0; x < gridWidth; x++) {
+        for (int y = 0; y < gridHeight; y++)
+        {
+            for (int x = 0; x < gridWidth; x++)
+            {
                 Transform tile = Instantiate(hexPrefab) as Transform;
                 Vector2 gridPos = new Vector2(x, y);
                 // Move to the correct location

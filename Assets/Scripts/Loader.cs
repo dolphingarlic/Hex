@@ -1,9 +1,11 @@
 using UnityEngine;
 
-public class Loader : MonoBehaviour {
+public class Loader : MonoBehaviour
+{
     public GameObject gameManager;
 
-    void Awake() {
+    void Awake()
+    {
         if (GameManager.instance == null)
             Instantiate(gameManager);
     }
