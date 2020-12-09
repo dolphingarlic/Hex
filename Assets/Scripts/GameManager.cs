@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     private readonly int[] dx = { 0, 1, -1, 1, -1, 0 };
     private readonly int[] dy = { -1, -1, 0, 0, 1, 1 };
 
+    private int framesSincemove = 0;
+
     private int DsuFind(int a)
     {
         while (dsu[a] != a)
@@ -176,6 +178,8 @@ public class GameManager : MonoBehaviour
             TextMeshProUGUI tmp = gameOverMenu.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             tmp.text = "Player 2 wins!";
         }
+
+        framesSincemove = 0;
     }
 
     private void Update()
@@ -186,15 +190,16 @@ public class GameManager : MonoBehaviour
                 gameOverMenu.SetActive(true);
             else
             {
-                if (player1Turn && PlayerPrefs.GetInt("player1IsAI") == 1)
+                if (player1Turn && PlayerPrefsX.GetBool("player1IsAI") && framesSincemove >= 20)
                 {
                     aiComponent.MakeMove(1, PlayerPrefs.GetInt("player1AILevel"));
                 }
-                if (!player1Turn && PlayerPrefs.GetInt("player2IsAI") == 1)
+                if (!player1Turn && PlayerPrefsX.GetBool("player2IsAI") && framesSincemove >= 20)
                 {
                     aiComponent.MakeMove(-1, PlayerPrefs.GetInt("player2AILevel"));
                 }
             }
         }
+        framesSincemove++;
     }
 }

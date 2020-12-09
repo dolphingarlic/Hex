@@ -64,5 +64,21 @@ public class GridManager : MonoBehaviour
                 GameManager.instance.hex[x, y] = hex;
             }
         }
+
+        // Style the borders
+        GameObject[] player1Borders = GameObject.FindGameObjectsWithTag("Player 1 Border");
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < player1Borders[i].transform.childCount; j++) {
+                Transform c = player1Borders[i].transform.GetChild(j);
+                c.GetComponent<SpriteRenderer>().color = PlayerPrefsX.GetColor("player1WinColor");
+            }
+        }
+        GameObject[] player2Borders = GameObject.FindGameObjectsWithTag("Player 2 Border");
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < player2Borders[i].transform.childCount; j++) {
+                Transform c = player2Borders[i].transform.GetChild(j);
+                c.GetComponent<SpriteRenderer>().color = PlayerPrefsX.GetColor("player2WinColor");
+            }
+        }
     }
 }

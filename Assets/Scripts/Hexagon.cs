@@ -5,10 +5,6 @@ using UnityEngine.EventSystems;
 public class Hexagon : MonoBehaviour
 {
     public Color defaultColor;
-    public static Color player1ActiveColor = new Color(26 / 255f, 164 / 255f, 242 / 255f);
-    public static Color player2ActiveColor = new Color(225 / 255f, 45 / 255f, 37 / 255f);
-    public static Color player1WinColor = new Color(167 / 255f, 214 / 255f, 247 / 255f);
-    public static Color player2WinColor = new Color(255 / 255f, 90 / 255f, 94 / 255f);
 
     public int rotateAmount = 180;
     public int speed = 15;
@@ -21,15 +17,29 @@ public class Hexagon : MonoBehaviour
     public static int busyFlipping = 0;
 
     private SpriteRenderer spriteRenderer;
+
+    private Color player1ActiveColor;
+    private Color player2ActiveColor;
+    private Color player1WinColor;
+    private Color player2WinColor;
     public bool flipped = false;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        player1ActiveColor = PlayerPrefsX.GetColor("player1ActiveColor");
+        player2ActiveColor = PlayerPrefsX.GetColor("player2ActiveColor");
+        player1WinColor = PlayerPrefsX.GetColor("player1WinColor");
+        player2WinColor = PlayerPrefsX.GetColor("player2WinColor");
     }
 
     public IEnumerator Flip(bool undo = false)
     {
+        // Wait for colors to be loaded
+        while (player1ActiveColor.Equals(Color.clear) || player2ActiveColor.Equals(Color.clear))
+            yield return null;
+
         // Wait for previous flip to finish
         busyFlipping++;
 
@@ -71,8 +81,16 @@ public class Hexagon : MonoBehaviour
     private void OnMouseDown()
     {
         // Can only flip a tile once
-        if (flipped || busyFlipping != 0 || EventSystem.current.IsPointerOverGameObject())
+        if (flipped || busyFlipping != 0)
             return;
+        // Don't flip on AI turn
+        if ((GameManager.instance.player1Turn && PlayerPrefsX.GetBool("player1IsAI")) ||
+            (!GameManager.instance.player1Turn && PlayerPrefsX.GetBool("player2IsAI")))
+            return;
+        // Don't flip when paused
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         // Flip and toggle the turn
         GameManager.instance.HandleFlip(x, y);
     }

@@ -11,11 +11,11 @@ public class SettingsManager : MonoBehaviour
     public GameObject player1LevelNumber;
     public GameObject player2LevelNumber;
 
-    private void Awake()
+    private void Start()
     {
         // Human or AI settings
-        player1AiToggle.isOn = PlayerPrefs.GetInt("player1IsAI") == 1;
-        player2AiToggle.isOn = PlayerPrefs.GetInt("player2IsAI") == 1;
+        player1AiToggle.isOn = PlayerPrefsX.GetBool("player1IsAI");
+        player2AiToggle.isOn = PlayerPrefsX.GetBool("player2IsAI");
 
         player1AiToggle.onValueChanged.AddListener(delegate
         {
@@ -27,7 +27,7 @@ public class SettingsManager : MonoBehaviour
         });
 
         // AI level settings
-        if (PlayerPrefs.GetInt("player1AILevel") == 0)
+        if (!PlayerPrefs.HasKey("player1AILevel"))
         {
             PlayerPrefs.SetInt("player1AILevel", 2);
             PlayerPrefs.SetInt("player2AILevel", 2);
@@ -49,17 +49,24 @@ public class SettingsManager : MonoBehaviour
         {
             SetPlayer2AILevel(player2LevelSlider);
         });
+
+        // Colors
+        PlayerPrefsX.SetColor("player1ActiveColor", new Color(26 / 255f, 164 / 255f, 242 / 255f));
+        PlayerPrefsX.SetColor("player2ActiveColor", new Color(225 / 255f, 45 / 255f, 37 / 255f));
+        PlayerPrefsX.SetColor("player1WinColor", new Color(167 / 255f, 214 / 255f, 247 / 255f));
+        PlayerPrefsX.SetColor("player2WinColor", new Color(255 / 255f, 90 / 255f, 94 / 255f));
+        PlayerPrefs.Save();
     }
 
     private void SetPlayer1IsAI(Toggle aiToggle)
     {
-        PlayerPrefs.SetInt("player1IsAI", aiToggle.isOn ? 1 : 0);
+        PlayerPrefsX.SetBool("player1IsAI", aiToggle.isOn);
         PlayerPrefs.Save();
     }
 
     private void SetPlayer2IsAI(Toggle aiToggle)
     {
-        PlayerPrefs.SetInt("player2IsAI", aiToggle.isOn ? 1 : 0);
+        PlayerPrefsX.SetBool("player2IsAI", aiToggle.isOn);
         PlayerPrefs.Save();
     }
 
@@ -84,9 +91,10 @@ public class SettingsManager : MonoBehaviour
         if (!colorToggle.isOn) return;
 
         ColorInfo colorInfo = colorToggle.gameObject.GetComponent<ColorInfo>();
-        Hexagon.player1ActiveColor = colorInfo.player1ActiveColor;
-        Hexagon.player2ActiveColor = colorInfo.player2ActiveColor;
-        Hexagon.player1WinColor = colorInfo.player1WinColor;
-        Hexagon.player2WinColor = colorInfo.player2WinColor;
+        PlayerPrefsX.SetColor("player1ActiveColor", colorInfo.player1ActiveColor);
+        PlayerPrefsX.SetColor("player2ActiveColor", colorInfo.player2ActiveColor);
+        PlayerPrefsX.SetColor("player1WinColor", colorInfo.player1WinColor);
+        PlayerPrefsX.SetColor("player2WinColor", colorInfo.player2WinColor);
+        PlayerPrefs.Save();
     }
 }
