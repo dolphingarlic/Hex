@@ -157,7 +157,7 @@ MonoBehaviour:
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   rotateAmount: 180
   speed: 15
-  flipSound: {fileID: 8300000, guid: 97b1c179f26c07b479268cc8de03fbc8, type: 3}
+  flipSound: {fileID: 8300000, guid: 6c7559099424f464bb7249e356643e55, type: 3}
   x: 0
   y: 0
   flipped: 0
