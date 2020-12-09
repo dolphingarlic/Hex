@@ -88,7 +88,7 @@ public class Hexagon : MonoBehaviour
             (!GameManager.instance.player1Turn && PlayerPrefsX.GetBool("player2IsAI")))
             return;
         // Don't flip when paused
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (GameObject.Find("PauseMenu") != null)
             return;
 
         // Flip and toggle the turn

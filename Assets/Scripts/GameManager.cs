@@ -184,6 +184,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        // Don't move while paused
+        if (GameObject.Find("PauseMenu") != null)
+            return;
+
         if (Hexagon.busyFlipping == 0)
         {
             if (gameOver)
