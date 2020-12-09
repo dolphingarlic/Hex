@@ -155,10 +155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  player1Color: {r: 0.019607844, g: 0.78039217, b: 0.69411767, a: 1}
-  player2Color: {r: 0.78431374, g: 0, b: 0.8627451, a: 1}
-  player1WinColor: {r: 0.34603062, g: 0.9056604, b: 0.8484255, a: 1}
-  player2WinColor: {r: 0.9474463, g: 0.3726415, b: 1, a: 1}
   rotateAmount: 180
   speed: 15
   flipSound: {fileID: 8300000, guid: 97b1c179f26c07b479268cc8de03fbc8, type: 3}

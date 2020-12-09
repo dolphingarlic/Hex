@@ -74,9 +74,9 @@ public class GameManager : MonoBehaviour {
     }
 
     private IEnumerator DfsAndFlip(int x, int y) {
-        yield return new WaitForSeconds(0.15f);
-        // Flip and mark as visited
+        // Mark as visited, wait, and then flip
         visited[x, y] = true;
+        yield return new WaitForSeconds(0.15f);
         StartCoroutine(hex[x, y].Flip());
 
         for (int i = 0; i < 6; i++) {
@@ -141,6 +141,9 @@ public class GameManager : MonoBehaviour {
         // Don't flip again
         hex[x, y].flipped = true;
         StartCoroutine(hex[x, y].Flip());
+
+        // Update potentials
+        aiComponent.UpdatePotentials(0);
 
         if (DsuFind(totCells) == DsuFind(totCells + 1)) {
             // Player 1 has won

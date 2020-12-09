@@ -4,10 +4,10 @@ using UnityEngine.EventSystems;
 
 public class Hexagon : MonoBehaviour {
     public Color defaultColor;
-    public Color player1Color;
-    public Color player2Color;
-    public Color player1WinColor;
-    public Color player2WinColor;
+    public static Color player1ActiveColor = new Color(26/255f, 164/255f, 242/255f);
+    public static Color player2ActiveColor = new Color(225/255f, 45/255f, 37/255f);
+    public static Color player1WinColor = new Color(167/255f, 214/255f, 247/255f);
+    public static Color player2WinColor = new Color(255/255f, 90/255f, 94/255f);
     
     public int rotateAmount = 180;
     public int speed = 15;
@@ -39,9 +39,9 @@ public class Hexagon : MonoBehaviour {
             color = defaultColor;
             flipped = false;
         } else if (GameManager.instance.player1Turn)
-            color = (GameManager.instance.gameOver ? player1WinColor : player1Color);
+            color = (GameManager.instance.gameOver ? player1WinColor : player1ActiveColor);
         else
-            color = (GameManager.instance.gameOver ? player2WinColor : player2Color);
+            color = (GameManager.instance.gameOver ? player2WinColor : player2ActiveColor);
 
         // Spin halfway
         for (int i = 0; i < rotateAmount; i += 2 * speed) {

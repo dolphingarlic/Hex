@@ -10,7 +10,7 @@ public class SettingsManager : MonoBehaviour {
     public GameObject player1LevelNumber;
     public GameObject player2LevelNumber;
 
-    private void Start() {
+    private void Awake() {
         // Human or AI settings
         player1AiToggle.isOn = PlayerPrefs.GetInt("player1IsAI") == 1;
         player2AiToggle.isOn = PlayerPrefs.GetInt("player2IsAI") == 1;
@@ -66,5 +66,15 @@ public class SettingsManager : MonoBehaviour {
         PlayerPrefs.SetInt("player2AILevel", player2Level);
         PlayerPrefs.Save();
         player2LevelNumber.GetComponent<TextMeshProUGUI>().text = player2Level.ToString();
+    }
+
+    public void SetColor(Toggle colorToggle) {
+        if (!colorToggle.isOn) return;
+
+        ColorInfo colorInfo = colorToggle.gameObject.GetComponent<ColorInfo>();
+        Hexagon.player1ActiveColor = colorInfo.player1ActiveColor;
+        Hexagon.player2ActiveColor = colorInfo.player2ActiveColor;
+        Hexagon.player1WinColor = colorInfo.player1WinColor;
+        Hexagon.player2WinColor = colorInfo.player2WinColor;
     }
 }

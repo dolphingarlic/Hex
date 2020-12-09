@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.78431374, g: 0, b: 0.8627451, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -159,8 +159,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6922442974915405335}
   - component: {fileID: 2134129360998235368}
+  - component: {fileID: 2685739322868950711}
   m_Layer: 5
-  m_Name: Colour1
+  m_Name: ColorToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,6 +236,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &2685739322868950711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3028327183409086683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1138ddb14f27b349baba374019df63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1ActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  player2ActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  player1WinColor: {r: 1, g: 1, b: 1, a: 1}
+  player2WinColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &4289838732607918794
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.019607844, g: 0.78039217, b: 0.69411767, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
