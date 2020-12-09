@@ -17,7 +17,7 @@ public class Hexagon : MonoBehaviour {
     [HideInInspector] public int x;
     [HideInInspector] public int y;
 
-    public static bool busyFlipping = false;
+    public static int busyFlipping = 0;
 
     private SpriteRenderer spriteRenderer;
     public bool flipped = false;
@@ -28,7 +28,7 @@ public class Hexagon : MonoBehaviour {
 
     public IEnumerator Flip(bool undo = false) {
         // Wait for previous flip to finish
-        busyFlipping = true;
+        busyFlipping++;
 
         // Flipping sound effect with random pitch
         SoundManager.instance.PlaySingle(flipSound);
@@ -56,14 +56,14 @@ public class Hexagon : MonoBehaviour {
             yield return null;
         }
 
-        busyFlipping = false;
+        busyFlipping--;
         if (!GameManager.instance.gameOver && !undo)
             GameManager.instance.player1Turn = !GameManager.instance.player1Turn;
     }
 
     private void OnMouseDown() {
         // Can only flip a tile once
-        if (flipped || busyFlipping || EventSystem.current.IsPointerOverGameObject())
+        if (flipped || busyFlipping != 0 || EventSystem.current.IsPointerOverGameObject())
             return;
         // Flip and toggle the turn
         GameManager.instance.HandleFlip(x, y);

@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
 
         // Reset static variables
         moves = 0;
-        Hexagon.busyFlipping = false;
+        Hexagon.busyFlipping = 0;
 
         // Initialize DSU
         totCells = GridManager.gridWidth * GridManager.gridHeight;
@@ -74,10 +74,10 @@ public class GameManager : MonoBehaviour {
     }
 
     private IEnumerator DfsAndFlip(int x, int y) {
+        yield return new WaitForSeconds(0.15f);
         // Flip and mark as visited
         visited[x, y] = true;
         StartCoroutine(hex[x, y].Flip());
-        yield return new WaitForSeconds(0.15f);
 
         for (int i = 0; i < 6; i++) {
             int nx = x + dx[i];
@@ -118,7 +118,8 @@ public class GameManager : MonoBehaviour {
             for (int y = 0; y < GridManager.gridHeight; y++) {
                 int currNorm = Normalize(x, y);
                 if (color[x, y] != 0) {
-                    if (x != y) // Ensure a single flip
+                    // Ensure a single flip
+                    if (x != y)
                         StartCoroutine(hex[x, y].Flip(true));
                     // "Reset" the cell
                     color[x, y] = 0;
@@ -157,17 +158,17 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (!gameOver && !Hexagon.busyFlipping) {
-            if (player1Turn && PlayerPrefs.GetInt("player1IsAI") == 1) {
-                aiComponent.MakeMove(1, 3);
+        if (Hexagon.busyFlipping == 0) {
+            if (gameOver)
+                gameOverMenu.SetActive(true);
+            else {
+                if (player1Turn && PlayerPrefs.GetInt("player1IsAI") == 1) {
+                    aiComponent.MakeMove(1, PlayerPrefs.GetInt("player1AILevel"));
+                }
+                if (!player1Turn && PlayerPrefs.GetInt("player2IsAI") == 1) {
+                    aiComponent.MakeMove(-1, PlayerPrefs.GetInt("player2AILevel"));
+                }
             }
-            if (!player1Turn && PlayerPrefs.GetInt("player2IsAI") == 1) {
-                aiComponent.MakeMove(-1, 3);
-            }
-        }
-
-        if (gameOver && !Hexagon.busyFlipping) {
-            gameOverMenu.SetActive(true);
         }
     }
 }
