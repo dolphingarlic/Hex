@@ -539,17 +539,17 @@ PrefabInstance:
     - target: {fileID: 565738011435988804, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.9528302
       objectReference: {fileID: 0}
     - target: {fileID: 565738011435988804, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.91147983
+      value: 0.8986784
       objectReference: {fileID: 0}
     - target: {fileID: 565738011435988804, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.39101997
       objectReference: {fileID: 0}
     - target: {fileID: 2134129360998235368, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
@@ -614,17 +614,17 @@ PrefabInstance:
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2ActiveColor.r
-      value: 1
+      value: 0.91372555
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2ActiveColor.g
-      value: 0.91147983
+      value: 0.7568628
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2ActiveColor.b
-      value: 0
+      value: 0.12941177
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
@@ -644,17 +644,17 @@ PrefabInstance:
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2WinColor.g
-      value: 0.9864857
+      value: 0.8986784
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2WinColor.b
-      value: 0.6933962
+      value: 0.39101997
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2WinColor.r
-      value: 1
+      value: 0.9528302
       objectReference: {fileID: 0}
     - target: {fileID: 3028327183409086683, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
@@ -1181,7 +1181,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cff20a99447789f47ba4696cdd40bf6e, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1259,7 +1259,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_subTextObjects:
   - {fileID: 0}
   - {fileID: 0}
@@ -2903,14 +2903,23 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Hex is a two-player strategy game invented by mathematician and poet Piet
-    Hein in 1942 and independently by John Nash in 1948.\n\nNash proved in 1949 that
-    Hex can't end in a draw - a non-trivial result colloquially called the \"Hex
-    theorem\", which we now know is equivalent to the Brouwer fixed-point theorem.\n\nNash
+  m_text: 'Hex is a two-player strategy game invented by mathematician and poet Piet
+    Hein in 1942 and independently by John Nash in 1948.
+
+
+    Nash proved in 1949
+    that Hex can''t end in a draw - a non-trivial result colloquially called the
+    "Hex theorem", which we now know is equivalent to the Brouwer fixed-point theorem.
+
+
+    Nash
     also proved that the first player in Hex on a board of any size can force a win.
-    However, the actual winning strategy for 11\xD711 Hex is still unknown.\n\nIn
-    11\xD711 Hex, there are approximately 2.4e56 legal positions - about 5 billion
-    times more than in chess!"
+    However, the actual winning strategy for 11x11 Hex is still unknown.
+
+
+    In
+    11x11 Hex, there are approximately 2.4e56 legal positions - about 5 billion times
+    more than in chess!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cff20a99447789f47ba4696cdd40bf6e, type: 2}
   m_sharedMaterial: {fileID: 7724887314476292869, guid: cff20a99447789f47ba4696cdd40bf6e,
@@ -5501,17 +5510,17 @@ PrefabInstance:
     - target: {fileID: 565738011435988804, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.20000002
+      value: 0.9921569
       objectReference: {fileID: 0}
     - target: {fileID: 565738011435988804, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.61960787
+      value: 0.8078432
       objectReference: {fileID: 0}
     - target: {fileID: 565738011435988804, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.40000004
+      value: 0.5764706
       objectReference: {fileID: 0}
     - target: {fileID: 2134129360998235368, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
@@ -5561,62 +5570,62 @@ PrefabInstance:
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player1ActiveColor.r
-      value: 0.5803922
+      value: 0.18823531
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player1ActiveColor.g
-      value: 0.8588236
+      value: 0.050980397
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player1ActiveColor.b
-      value: 0.8980393
+      value: 0.2392157
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2ActiveColor.r
-      value: 0.20000002
+      value: 0.9921569
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2ActiveColor.g
-      value: 0.61960787
+      value: 0.8078432
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2ActiveColor.b
-      value: 0.40000004
+      value: 0.5764706
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player1WinColor.r
-      value: 0.80544674
+      value: 0.3325249
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player1WinColor.g
-      value: 0.9306232
+      value: 0.21181916
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player1WinColor.b
-      value: 0.9433962
+      value: 0.3773585
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2WinColor.g
-      value: 0.7924528
+      value: 0.81089973
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2WinColor.b
-      value: 0.6701776
+      value: 0.6564169
       objectReference: {fileID: 0}
     - target: {fileID: 2685739322868950711, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: player2WinColor.r
-      value: 0.55695975
+      value: 0.9339623
       objectReference: {fileID: 0}
     - target: {fileID: 3028327183409086683, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
@@ -5626,17 +5635,17 @@ PrefabInstance:
     - target: {fileID: 3541293822804826179, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.5803922
+      value: 0.18823531
       objectReference: {fileID: 0}
     - target: {fileID: 3541293822804826179, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.8588236
+      value: 0.050980397
       objectReference: {fileID: 0}
     - target: {fileID: 3541293822804826179, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.8980393
+      value: 0.2392157
       objectReference: {fileID: 0}
     - target: {fileID: 6922442974915405335, guid: d488c1f859e7912468681822651ffd31,
         type: 3}
@@ -5952,7 +5961,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cff20a99447789f47ba4696cdd40bf6e, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6030,7 +6039,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_subTextObjects:
   - {fileID: 0}
   - {fileID: 0}
@@ -7485,7 +7494,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
@@ -7808,7 +7817,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
